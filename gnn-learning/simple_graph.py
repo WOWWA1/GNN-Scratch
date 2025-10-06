@@ -19,7 +19,7 @@ class Graph:
             self.mygraph[v2].append(v1)
             self.edges += 1
     def get_neighbors(self,id):
-        #assumes that it exists
+    
         return self.mygraph[id]
     
     def print_graph(self):
@@ -29,24 +29,3 @@ class Graph:
   
 
 
-if __name__ == "__main__":
-    print("=== Testing Graph ===")
-    g = Graph()
-    
-    # Add some nodes
-    g.add_node(1)
-    g.add_node(2)
-    g.add_node(3)
-    
-    # Add some edges
-    g.add_edge(1, 2)
-    g.add_edge(2, 3)
-    g.add_edge(1, 3)
-    
-    # Print the graph
-    print("\nGraph structure:")
-    g.print_graph()
-    
-    # Test getting neighbors
-    print(f"\nNeighbors of node 1: {g.get_neighbors(1)}")
-    print(f"Neighbors of node 2: {g.get_neighbors(2)}")
