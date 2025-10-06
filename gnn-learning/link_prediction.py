@@ -106,7 +106,6 @@ def pair_to_vector(pair, embeddings):
 def evaluate_model(neural_network, test_pairs, embeddings):
     correct = 0
     total = 0
-    errors = 0
     
     import random
     positive_samples = [(pair, label) for pair, label in test_pairs if label == 1]
@@ -118,17 +117,13 @@ def evaluate_model(neural_network, test_pairs, embeddings):
     random.shuffle(sample_test_pairs)
     
     for i, (pair, true_label) in enumerate(sample_test_pairs):
-        try:
-            vector = pair_to_vector(pair, embeddings)
-            predicted = neural_network.forward(vector)
-            binary_prediction = 1 if predicted[0] > 0.5 else 0
-            
-            if binary_prediction == true_label:
-                correct += 1
-            total += 1
-        except Exception as e:
-            errors += 1
-            continue
+        vector = pair_to_vector(pair, embeddings)
+        predicted = neural_network.forward(vector)
+        binary_prediction = 1 if predicted[0] > 0.5 else 0
+        
+        if binary_prediction == true_label:
+            correct += 1
+        total += 1
     
     accuracy = correct / total if total > 0 else 0
     return accuracy
